@@ -12,9 +12,7 @@
     
 <title>tasky</title>
 </head>
-<body>
-
-    <!-- fontawesome -->
+<body onload="loadInitialTaskCards()">
 
    
 
@@ -47,7 +45,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="saveChanges()" >Save Changes</button>
+        <button type="button" class="btn btn-primary" onclick="saveChanges()" data-bs-dismiss="modal" >Save Changes</button>
       </div>
     </div>
   </div>
@@ -73,7 +71,7 @@
           </div>
         </div>
       </nav>
-dzewzx      <div class="container">
+     <div class="container">
       <!--searchbar-->
       <section class="mt-5">
           <div class="row justify-content-center">
