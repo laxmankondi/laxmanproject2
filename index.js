@@ -3,7 +3,7 @@ console.log(taskContainer);
 
 // global store
 
-const globalstore = [];
+let globalstore = [];
 
 const newCard = ({
     id,
@@ -15,7 +15,7 @@ const newCard = ({
 <div class="card shadow ">
     <div class="card-header d-flex justify-content-end gap-3"> 
       <button type="button" class="btn btn-outline-success"><i class="fas fa-pencil-alt"></i></button>
-       <button type="button" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+       <button type="button" id=${id} class="btn btn-outline-danger" id=${id} onlick="deletecard.apply(this, arguments)"><i class="fas fa-trash-alt" onlick="deletecard.apply(this, arguments)"></i></button>
     </div>          
         <img src=${imageUrl} alt="...">
         <div class="card-body">
@@ -38,16 +38,44 @@ const newCard = ({
      const { cards } = JSON.parse(getInitialData); 
 
      cards.map((card) => {
-      const createNewCard = newCard(card);
+      const createNewCard = newCard(cardObject);
       taskContainer.insertAdjacentHTML("beforeend", createNewCard);
       globalstore.push(card);
      });
 
    };
 
+   const deletecard = (event) => {
+
+    event = window.event;
+    const targetID = event.target.id;
+    const tagname = event.target.tagName;
+    console.log(targetID);
+
+    const newUpdatedArray = globalStore.filter((cardObject) => cardObject.id != targetID);
+
+  
+
+   globalstore = newUpdatedArray;
+
+   if(tagname === "BUTTON"){
+
+   return event.target.parentNode.parentNode.parentNode.parentNode.removeChild(
+    event.target.parentNode.parentNode.parentNode);
+  };
+
+   
+  return event.target.parentNode.parentNode.parentNode.parentNode.parentNode.removeChild(
+    event.target.parentNode.parentNode.parentNode.parentNode);
+    
+  };
+
+ 
+
+
 const saveChanges = () => {
    const taskData = {
-       id: `${Date.now()}`, // unique number for cards /* 7981346971356 */
+       id: `${Date.now()}`, 
        imageUrl: document.getElementById("imageurl").value,
        taskTitle: document.getElementById("tasktitle").value,
        tasKtype: document.getElementById("tasktype").value,
@@ -60,3 +88,4 @@ const saveChanges = () => {
     
     localStorage.setItem("tasky", JSON.stringify({ cards: globalstore}));
 };
+
